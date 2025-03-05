@@ -6,7 +6,7 @@ import ReportDetails from "./components/ReportDetails";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/reports-dashboard">
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Typography variant="h4" textAlign="center" gutterBottom>
           Reports Management System

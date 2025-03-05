@@ -27,7 +27,7 @@ function ReportDetails() {
   }, [id]);
 
   // ✅ Function to generate and download a structured PDF
-  const handleDownloadPDF = async () => {
+  const handleDownloadPDF = () => {
     if (!report) {
       alert("The report data is missing. Try again.");
       return;
@@ -36,12 +36,12 @@ function ReportDetails() {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth(); // Get PDF width
 
-    // ✅ Load the logo
+    // ✅ Load the logo (Ensure the logo is in `public/logo.png`)
     const logo = new Image();
-    logo.src = "/logo.png"; // Ensure "logo.png" is in the public folder
+    logo.src = `${process.env.PUBLIC_URL}/logo.png`; // ✅ Correct path for GitHub Pages
     logo.onload = () => {
-      const logoWidth = 50; // Logo width
-      const logoHeight = 50; // Logo height
+      const logoWidth = 50;
+      const logoHeight = 50;
       const centerX = (pageWidth - logoWidth) / 2; // Center the logo
 
       doc.addImage(logo, "PNG", centerX, 10, logoWidth, logoHeight); // ✅ Center logo
@@ -83,10 +83,14 @@ function ReportDetails() {
   if (!report) return <Typography variant="h6" textAlign="center" mt={4}>Report not found.</Typography>;
 
   return (
-    <>
+    <Box sx={{ textAlign: "center", mt: 3 }}>
       {/* 🔹 Styled Report Details */}
-      <Paper sx={{ p: 4, mt: 3, textAlign: "center" }}>
-        <img src="/logo.png" alt="Company Logo" style={{ width: 100, marginBottom: 10 }} /> {/* ✅ Add logo in page */}
+      <Paper sx={{ p: 4, textAlign: "center" }}>
+        <img
+          src={`${process.env.PUBLIC_URL}/logo.png`}
+          alt="Company Logo"
+          style={{ width: 100, marginBottom: 10 }}
+        />
         <Typography variant="h4">{report.title}</Typography>
         <Typography variant="subtitle1" sx={{ mt: 1 }}>Date: {report.date || "No date provided"}</Typography>
         <Typography variant="body1" sx={{ mt: 2 }}>{report.summary}</Typography>
@@ -100,7 +104,7 @@ function ReportDetails() {
       >
         DOWNLOAD AS PDF
       </Button>
-    </>
+    </Box>
   );
 }
 
