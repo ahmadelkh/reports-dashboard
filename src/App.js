@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container, Typography } from "@mui/material";
+import ReportForm from "./components/ReportForm";
+import ReportList from "./components/ReportList";
+import ReportDetails from "./components/ReportDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Typography variant="h4" textAlign="center" gutterBottom>
+          Reports Management System
+        </Typography>
+        <Routes>
+          <Route path="/" element={<><ReportForm /><ReportList /></>} />
+          <Route path="/report/:id" element={<ReportDetails />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 
